@@ -123,3 +123,7 @@ TYSON poses very little restrictions on types. All it requires is:
 - for an atomic type to be associated with a value space, a lexical space (the string representations of the values) and a lexical mapping that associates each lexical value with a typed value (the mapping may not be injective).
 
 The details of creating a type, documenting it, sharing it with the world, agreeing on names, type discovery and so on is out of scope of TYSON. All TYSON does is provide syntax to losslessly store and share typed data once types are agreed on.
+
+# Specification
+
+The TYSON specification can be found at [www.tyson-spec.com](www.tyson-spec.com)

@@ -205,7 +205,7 @@ Plus, you can also have the special IEEE754 double values that are not supported
 
 # Define your own types
 
-TYSON poses very little restrictions on types. All it requires for compatibility and soundness is that only user-defined types fulfilling the requirements below be instantiated, parsed and validated with TYSON:
+TYSON poses very little restrictions on types. All it requires for compatibility and soundness is that only user-defined types fulfilling the requirements below be instantiated, parsed with a TYSON processor and validated by the consuming application:
 
 - a user-defined object type must be associated with a value space (a subset of the set of all objects),
 

@@ -63,7 +63,7 @@ And objects:
 
 ## More atomic types
 
-What is new with TYSON is type support beyond the basic types of JSON. Anybody can create types, give them a name, and go ahead and use them (how these types are created, documented and agreed on is out of scope of TYSON, though).
+What is new with TYSON is type support beyond the basic types of JSON. Anybody can create types, give them a name, and go ahead and use them (how exactly these types are created, documented and agreed on is out of scope of TYSON, though).
 
 For example, in a straightforward way, atomic types from XML Schema can be taken over with no effort:
 
@@ -172,6 +172,20 @@ TYSON poses very little restrictions on types. All it requires is:
 
 The details of creating a type, documenting it, sharing it with the world, agreeing on names, type discovery and so on is out of scope of TYSON. All TYSON does is provide syntax to losslessly store and share typed data once types are agreed on.
 
+# Quotes
+
+For the purpose of validation, TYSON does not differentiate between quoted and unquoted values: it takes whatever there is as the lexical value, excluding the quotes if there are any.
+
+The following two values are the same: the integer 1.
+```
+("integer") 1
+("integer") "1"
+```
+
+Note that this has nothing to do with casting. TYSON does not cast. It only looks whether the lexical value is in the lexical space of an atomic type.
+
+This means that value that JSON allows to be unquoted do not need quotes, and can be used as lexical values of any atomic type.
+
 # Specification
 
-The TYSON specification can be found at [www.tyson-spec.com](www.tyson-spec.com)
+For more information, or to know more on corner cases, the TYSON specification can be found at [www.tyson-spec.com](www.tyson-spec.com)

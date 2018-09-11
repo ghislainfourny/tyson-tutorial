@@ -140,7 +140,7 @@ For example, the following values are not valid TYSON:
 ("boolean") "bar"
 ```
 
-TYSON, however, does not know of any other types, and validation must be done separately. For example, the following value is comformant TYSON, even though it is to be expected that some machinery in the outside world would say it is invalid:
+TYSON, however, does not know of any other types, and validation must be done separately. For example, the following value is comformant TYSON, even though it is to be expected that some machinery in the outside world, aware of the documentation of `my-integer`, would say it is invalid:
 
 ```
 ("my-integer") "1.1"
@@ -164,13 +164,17 @@ Thanks to the more fine-grained number types, it is possible to have more contro
 
 # Define your own types
 
-TYSON poses very little restrictions on types. All it requires is:
+TYSON poses very little restrictions on types. All it requires for compatibility and soundness is that only user-defined types fulfilling the requirements below be instantiated, parsed and validated with TYSON:
 
-- for an object type to be associated with a value space (a subset of the set of all objects),
-- for an array type to be associated with a value space (a subset of the set of all arrays),
-- for an atomic type to be associated with a value space, a lexical space (the string representations of the values) and a lexical mapping that associates each lexical value with a typed value (the mapping may not be injective).
+- a user-defined object type must be associated with a value space (a subset of the set of all objects),
+
+- an array type must be associated with a value space (a subset of the set of all arrays),
+
+- an atomic type must be associated with a value space, a lexical space (the string representations of the values) and a lexical mapping that associates each lexical value with a typed value (the mapping may not be injective).
 
 The details of creating a type, documenting it, sharing it with the world, agreeing on names, type discovery and so on is out of scope of TYSON. All TYSON does is provide syntax to losslessly store and share typed data once types are agreed on.
+
+If a TYSON engine (for example, one that also supports JSound) is provided with further types, and with their documentation in terms of value spaces, then it is also capable of validating values annotated with these types, in addition to builtin types. 
 
 # Quotes
 

@@ -38,7 +38,7 @@ This includes strings:
 "foo"
 ```
 
-Numbers:
+Numbers (We will see later on that there are several types thereof):
 
 ```
 1

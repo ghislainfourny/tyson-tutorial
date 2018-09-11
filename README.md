@@ -140,13 +140,15 @@ For example, the following values are not valid TYSON:
 ("boolean") "bar"
 ```
 
-TYSON, however, does not know of any other types, and validation must be done separately. For example, in the absence of any knowledge on the type `my-integer`, the following value is in theory conformant TYSON.
+TYSON, however, does not know of any other types, and validation must be done separately. For example, because `my-integer` is not builtin, the following value is in conformant TYSON as far as the TYSON processor is concerned.
 
 ```
 ("my-integer") "1.1"
 ```
 
-However, in practice, TYSON producers and consumers will exchange instances that use types that they know and agree on. If it is known and agreed that the value space of the type `my-integer` is the set of all integers, then the above value must be rejected as invalid against that type. If somebody else in the world decides that his type `my-integer` is the set of all strings, then from their perspective the value is valid. How types are documented, named, known and standardized is out of scope of TYSON.
+The TYSON processor will simply tell the consuming application that it encountered a lexical value "1.1" annotated with the type "my-integer". It is then up to the consuming application to take it from there.
+
+In practice, TYSON users will exchange instances that use types that they know and agree on. If it is known and agreed that the value space of the type `my-integer` is the set of all integers, then the above value must be rejected -- by the consuming application, not the TYSON processor -- as invalid against that type. If somebody else in the world decides that his type `my-integer` is the set of all strings, then from their perspective the value is valid. How types are documented, named, known and standardized is out of scope of TYSON.
 
 # Number types
 
@@ -176,17 +178,20 @@ TYSON poses very little restrictions on types. All it requires for compatibility
 
 The details of creating a type, documenting it, sharing it with the world, agreeing on names, type discovery and so on is out of scope of TYSON. All TYSON does is provide syntax to losslessly store and share typed data once types are agreed on.
 
-If a TYSON engine (for example, one that also supports JSound) is provided with further types, and with their documentation in terms of value spaces, then it is also capable of validating values annotated with these types, in addition to builtin types. 
+If the consuming application of a TYSON processor (for example, with JSound support) is provided with further types, and with their documentation in terms of value spaces, then it should validate lexical values annotated with these types, while the builtin types are validated by the TYSON processor itself.
 
 # Quotes
 
-For the purpose of validation, TYSON does not differentiate between quoted and unquoted values: it takes whatever there is as the lexical value, excluding the quotes if there are any.
+For the purpose of validation, TYSON does not differentiate between quoted and unquoted values: it takes whatever there is as the lexical value, excluding the quotes if there are any. The consuming application will not even know whether the value was quoted or not.
 
 The following two values are the same: the integer 1.
+
 ```
 ("integer") 1
 ("integer") "1"
 ```
+
+In both cases, the consuming application receives the lexical value `1` annotated with the builtin type `integer`, along a green light that it is valid.
 
 Note that this has nothing to do with casting. TYSON does not cast. It only looks whether the lexical value is in the lexical space of an atomic type.
 

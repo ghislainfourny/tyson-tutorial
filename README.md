@@ -18,29 +18,40 @@ The first important thing to know is that any JSON value is also a TYSON value.
 
 This includes strings:
 
-   "foo"
+```
+"foo"
+```
 
 Numbers:
 
+```
    1
    3.14
    6.022e23
+```
 
 Booleans:
 
+```
    true
    false
+```
 
 Null:
 
+```
    null
+```
 
 Arrays:
 
+```
    [ "foo", 1, null, true, [ 1, 2, 3, 4 ] ]
+```
 
 And objects:
 
+```
    {
      "foo" : "bar",
      "bar" : {
@@ -48,6 +59,7 @@ And objects:
        "bar" : true,
        "foobar" : null
    }
+```
 
 ## More atomic types
 
@@ -57,16 +69,23 @@ In a straightforward way, atomic types from XML Schema can be taken over with no
 
 For example, you can have dates:
 
+```
    ("date") "2018-09-01" 
+```
 
 Binary values:
 
+```
    ("hexBinary") "0123456789abcdef"
+```
 
 Object and array types can also be user-defined:
 
+```
    ("array-of-booleans") [ true, true, false, true, false ]
+```
 
+```
    ("person") {
      "name" : "Cooper",
      "first" : "Sheldon",
@@ -74,6 +93,7 @@ Object and array types can also be user-defined:
      "picture" : ("hexBinary") "0123456789abcdef",
      "friends" : ("ids") [ 1, 2, 4, 5 ]
    }
+```
 
 A type annotation can be put in front of absolutely any value, as a string in parenthesis. And this is all there is to know about the TYSON syntax in itself, because there is nothing else.
 
@@ -92,6 +112,7 @@ TYSON explicitly introduces builtin types corresponding to JSON values:
 
 For backward compatibility and ease of use, these annotations are implicit. The document seen above is semantically the same as the more explicit:
 
+```
    ("object") {
      "foo" : ("string") "bar",
      "bar" : ("object") {
@@ -99,6 +120,7 @@ For backward compatibility and ease of use, these annotations are implicit. The 
        "bar" : ("boolean") true,
        "foobar" : ("null") null
    }
+```
 
 For numbers, anything with no dots and no scientific notation is implicitly an integer, anything with a dot and no scientific notation a decimal, anything in scientific notation a double.
 
@@ -108,11 +130,17 @@ TYSON does not introduce any other type (not even date or hexBinary, which is le
 
 Thanks to the more fine-grained number types, it is possible to have more control about how some data appears to a host language, beyond just calling it a number:
 
+```
 ("decimal") 2
+```
 
+```
 ("double") 3.14
+```
 
+```
 ("integer") 1e10
+```
 
 # Define your own types
 

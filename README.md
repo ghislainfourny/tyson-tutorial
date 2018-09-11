@@ -1,6 +1,6 @@
 # TYSON Tutorial
 
-This tutorial gives a user-friendly introduction to the TYSON syntax.
+This tutorial gives a user-friendly introduction to the [TYSON syntax](http://www.tyson-spec.com/).
 
 ## Executive summary
 

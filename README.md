@@ -17,13 +17,13 @@ It is compatible with any host language and is fully agnostic in this respect.
 With TYSON, you can add type annotations to JSON documents by prefixing values with a type name in parentheses.
 
 ```
-   ("person") {
-     "name" : "Cooper",
-     "first" : "Sheldon",
-     "birthdate" : ("date") "1980-02-26",
-     "picture" : ("hexBinary") "0123456789abcdef",
-     "friends" : ("ids") [ 1, 2, 4, 5 ]
-   }
+("person") {
+  "name" : "Cooper",
+  "first" : "Sheldon",
+  "birthdate" : ("date") "1980-02-26",
+  "picture" : ("hexBinary") "0123456789abcdef",
+  "friends" : ("ids") [ 1, 2, 4, 5 ]
+}
 ```
 
 ## JSON is TYSON
@@ -39,40 +39,41 @@ This includes strings:
 Numbers:
 
 ```
-   1
-   3.14
-   6.022e23
+1
+3.14
+6.022e23
 ```
 
 Booleans:
 
 ```
-   true
-   false
+true
+false
 ```
 
 Null:
 
 ```
-   null
+null
 ```
 
 Arrays:
 
 ```
-   [ "foo", 1, null, true, [ 1, 2, 3, 4 ] ]
+[ "foo", 1, null, true, [ 1, 2, 3, 4 ] ]
 ```
 
 And objects:
 
 ```
-   {
-     "foo" : "bar",
-     "bar" : {
-       "foo" : [ 1.2, 2, 4, 5, 2e5 ],
-       "bar" : true,
-       "foobar" : null
-   }
+{
+  "foo" : "bar",
+  "bar" : {
+    "foo" : [ 1.2, 2, 4, 5, 2e5 ],
+    "bar" : true,
+    "foobar" : null
+  }
+}
 ```
 
 ## More atomic types
@@ -84,13 +85,13 @@ For example, in a straightforward way, atomic types from XML Schema can be taken
 For example, you can have dates:
 
 ```
-   ("date") "2018-09-01" 
+("date") "2018-09-01" 
 ```
 
 Binary values:
 
 ```
-   ("hexBinary") "0123456789abcdef"
+("hexBinary") "0123456789abcdef"
 ```
 
 Types such as the above are not part of the TYSON specification itself, but they are introduced in JSound, a schema language that works with TYSON.
@@ -98,17 +99,17 @@ Types such as the above are not part of the TYSON specification itself, but they
 Object and array types can also be user-defined:
 
 ```
-   ("array-of-booleans") [ true, true, false, true, false ]
+("array-of-booleans") [ true, true, false, true, false ]
 ```
 
 ```
-   ("person") {
-     "name" : "Cooper",
-     "first" : "Sheldon",
-     "birthdate" : ("date") "1980-02-26",
-     "picture" : ("hexBinary") "0123456789abcdef",
-     "friends" : ("ids") [ 1, 2, 4, 5 ]
-   }
+("person") {
+  "name" : "Cooper",
+  "first" : "Sheldon",
+  "birthdate" : ("date") "1980-02-26",
+  "picture" : ("hexBinary") "0123456789abcdef",
+  "friends" : ("ids") [ 1, 2, 4, 5 ]
+}
 ```
 
 A type annotation can be put in front of absolutely any value, as a string in parenthesis. And this is all there is to know about the TYSON syntax in itself, because there is nothing else.
@@ -126,16 +127,30 @@ TYSON explicitly introduces builtin types corresponding to JSON values:
 - double (all IEEE754 doubles)
 - null (a type that only matches the value `null`)
 
-For backward compatibility and ease of use, these annotations are implicit. The document seen above is semantically the same as the more explicit:
+For backward compatibility and ease of use, these annotations are implicit. The document seen above 
 
 ```
-   ("object") {
-     "foo" : ("string") "bar",
-     "bar" : ("object") {
-       "foo" : ("array") [ ("decimal") 1.2, ("integer") 2, ("integer") 4, ("integer") 5, ("double")2e5 ],
-       "bar" : ("boolean") true,
-       "foobar" : ("null") null
-   }
+{
+  "foo" : "bar",
+  "bar" : {
+    "foo" : [ 1.2, 2, 4, 5, 2e5 ],
+    "bar" : true,
+    "foobar" : null
+  }
+}
+```
+
+is semantically (seen from the consuming application) exactly the same as the more explicit:
+
+```
+("object") {
+  "foo" : ("string") "bar",
+  "bar" : ("object") {
+    "foo" : ("array") [ ("decimal") 1.2, ("integer") 2, ("integer") 4, ("integer") 5, ("double")2e5 ],
+    "bar" : ("boolean") true,
+    "foobar" : ("null") null
+  }
+}
 ```
 
 For numbers, anything with no dots (like `1`) and no scientific notation is implicitly an integer, anything with a dot and no scientific notation (like `1.1`) a decimal, anything in scientific notation (like `1e1`) a double.

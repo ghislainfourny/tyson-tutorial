@@ -195,6 +195,14 @@ Thanks to the more fine-grained number types, it is possible to have more contro
 ("integer") 1e10
 ```
 
+Plus, you can also have the special IEEE754 double values that are not supported by JSON itself:
+
+```
+("double") "NaN"
+("double") "+INF"
+("double") "-INF"
+```
+
 # Define your own types
 
 TYSON poses very little restrictions on types. All it requires for compatibility and soundness is that only user-defined types fulfilling the requirements below be instantiated, parsed and validated with TYSON:

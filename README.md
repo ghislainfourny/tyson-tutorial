@@ -140,11 +140,13 @@ For example, the following values are not valid TYSON:
 ("boolean") "bar"
 ```
 
-TYSON, however, does not know of any other types, and validation must be done separately. For example, the following value is comformant TYSON, even though it is to be expected that some machinery in the outside world, aware of the documentation of `my-integer`, would say it is invalid:
+TYSON, however, does not know of any other types, and validation must be done separately. For example, in the absence of any knowledge on the type `my-integer`, the following value is in theory conformant TYSON.
 
 ```
 ("my-integer") "1.1"
 ```
+
+However, in practice, TYSON producers and consumers will exchange instances that use types that they know and agree on. If it is known and agreed that the value space of the type `my-integer` is the set of all integers, then the above value must be rejected as invalid against that type. If somebody else in the world decides that his type `my-integer` is the set of all strings, then from their perspective the value is valid. How types are documented, named, known and standardized is out of scope of TYSON.
 
 # Number types
 

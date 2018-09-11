@@ -63,9 +63,9 @@ And objects:
 
 ## More atomic types
 
-What is new with TYSON is type support beyond the basic types of JSON. Anybody can create types, give them a name, and go ahead and use them.
+What is new with TYSON is type support beyond the basic types of JSON. Anybody can create types, give them a name, and go ahead and use them (how these types are created, documented and agreed on is out of scope of TYSON, though).
 
-In a straightforward way, atomic types from XML Schema can be taken over with no effort:
+For example, in a straightforward way, atomic types from XML Schema can be taken over with no effort:
 
 For example, you can have dates:
 
@@ -78,6 +78,8 @@ Binary values:
 ```
    ("hexBinary") "0123456789abcdef"
 ```
+
+Types such as the above are not part of the TYSON specification itself, but they are introduced in JSound, a schema language that works with TYSON.
 
 Object and array types can also be user-defined:
 
@@ -101,14 +103,14 @@ A type annotation can be put in front of absolutely any value, as a string in pa
 
 TYSON explicitly introduces builtin types corresponding to JSON values:
 
-- object
-- array
-- string
-- boolean
-- integer
-- decimal
-- double
-- null
+- object (all JSON objects)
+- array (all JSON arrays)
+- string (all JSON strings, sequences of Unicode codepoints)
+- boolean (`true` and `false`)
+- integer (all integers, with no limit or bound)
+- decimal (all decimal numbers, with no limit or bound)
+- double (all IEEE754 doubles)
+- null (a type that only matches the value `null`)
 
 For backward compatibility and ease of use, these annotations are implicit. The document seen above is semantically the same as the more explicit:
 
@@ -122,9 +124,27 @@ For backward compatibility and ease of use, these annotations are implicit. The 
    }
 ```
 
-For numbers, anything with no dots and no scientific notation is implicitly an integer, anything with a dot and no scientific notation a decimal, anything in scientific notation a double.
+For numbers, anything with no dots (like `1`) and no scientific notation is implicitly an integer, anything with a dot and no scientific notation (like `1.1`) a decimal, anything in scientific notation (like `1e1`) a double.
 
 TYSON does not introduce any other type (not even date or hexBinary, which is left to schema technologies such as JSound).
+
+# Builtin type validation
+
+TYSON performs validation against the above builtin types, and only them.
+
+For example, the following values are not valid TYSON:
+
+```
+("string") {}
+("array") "foo"
+("boolean") "bar"
+```
+
+TYSON, however, does not know of any other types, and validation must be done separately. For example, the following value is comformant TYSON, even though it is to be expected that some machinery in the outside world would say it is invalid:
+
+```
+("my-integer") "1.1"
+```
 
 # Number types
 

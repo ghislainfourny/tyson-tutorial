@@ -194,4 +194,4 @@ This means that value that JSON allows to be unquoted do not need quotes, and ca
 
 # Specification
 
-For more information, or to know more on corner cases, the TYSON specification can be found at [www.tyson-spec.com](www.tyson-spec.com)
+For more information, or to know more on corner cases, the TYSON specification can be found at [www.tyson-spec.com](http://www.tyson-spec.com)

@@ -12,6 +12,20 @@ It is designed to be compatible with any JSON Schema technology, meaning that it
 
 It is compatible with any host language and is fully agnostic in this respect.
 
+## JSON geek's summary
+
+With TYSON, you can add type annotations to JSON documents by prefixing values with a type name in parentheses.
+
+```
+   ("person") {
+     "name" : "Cooper",
+     "first" : "Sheldon",
+     "birthdate" : ("date") "1980-02-26",
+     "picture" : ("hexBinary") "0123456789abcdef",
+     "friends" : ("ids") [ 1, 2, 4, 5 ]
+   }
+```
+
 ## JSON is TYSON
 
 The first important thing to know is that any JSON value is also a TYSON value.

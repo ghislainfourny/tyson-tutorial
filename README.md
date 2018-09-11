@@ -20,6 +20,8 @@ With TYSON, you can add type annotations to JSON documents by prefixing values w
 ("person") {
   "name" : "Cooper",
   "first" : "Sheldon",
+  "middle" : "Lee",
+  "multiplication" : ("cell-division-kind") "MITOSIS",
   "birthdate" : ("date") "1980-02-26",
   "picture" : ("hexBinary") "0123456789abcdef",
   "friends" : ("ids") [ 1, 2, 4, 5 ]
